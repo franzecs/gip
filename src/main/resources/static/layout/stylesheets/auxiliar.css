@@ -1,0 +1,203 @@
+@import
+url('../fonts/Spectral-MediumItalic.ttf')
+ @charset "utf-8";
+/*******************\
+	STILO
+\*******************/
+.card, .card-radius, .card-home {
+	background-color: #ffffff;
+	padding: 10px;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-style: inset;
+	border-radius: 5px;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19) !important;
+}
+
+.card-radius {
+	border-radius: 10px;
+}
+
+.card-home {
+	margin-top: 150px;
+}
+
+.sombra, .sombra-btn {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19) !important;
+}
+
+.sombra-btn:hover {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+div>span.input-group-addon, input[type=text],input[type=email],input[type=checkbox], select, option{
+	padding:3px;
+	font-family: 'Spectral', serif;
+	font-weight: bold;
+}
+
+div>span.input-group-addon {
+	background-color: #d9edf7 !important;
+	font-style: italic;
+}
+
+.boxSearch {
+	width: 90px !important;
+}
+
+.boxOpt {
+	width: 60px !important;
+}
+
+.titulo, .header-text {
+	color: #0000ff;
+	font-size: 2.1em;
+	font-weight: bolder;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+}
+
+.header-text {
+	color: white;
+	text-align: center;
+	display: inline-block;
+	font-style: italic;
+	font-family: 'Spectral', serif;
+	margin-left: 10%;
+	position: fixed;
+}
+
+.login {
+	background-image: url('../images/background_simples.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.metal {
+	background-image: url('../images/metal.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.upcase {
+	text-transform: uppercase;
+}
+
+.lowcase {
+	text-transform: lowercase;
+}
+
+.capitalize {
+	text-transform: capitalize;
+}
+
+form > div, .componenteform{
+	padding: 5px;
+}
+
+.panel-heading {
+	font-weight: bolder;
+	font-style: italic;
+}
+
+/*******************\
+	UPLOAD
+\*******************/
+/*! UIkit 2.27.2 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+.uk-dragover {
+	box-shadow: 0 0 20px rgba(100, 100, 100, .3)
+}
+
+.wn-upload {
+	paddind: 15px;
+	border: 1px dashed #ddd;
+	border-radius: 4px;
+	background: #fafafa;
+	text-align: center;
+}
+
+.wn-upload-form-file {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 1px;
+}
+
+.wn-upload-form-file>input[type=file] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	opaciy: 0;
+	cursos: pointer;
+	font-size: 500px
+}
+
+/*******************\
+	TABELA
+\*******************/
+.ik-table-col-codigo, .ik-table-col-icons {
+	width: 60px;
+	text-align: center;
+}
+
+td {
+	text-align: justify;
+}
+
+th {
+	text-align: center;
+	color: #fff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+	background-image: linear-gradient(to bottom, #5bc0de 0%, #2aabd2 100%);
+}
+
+
+@media only screen and (max-width: 760px) , ( min-device-width : 768px)
+	and (max-device-width: 1024px) {
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr {
+		display: block;
+	}
+
+	/* esconder cabeçalho */
+	thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	tr {
+		border: 1px solid #ccc;
+	}
+	td {
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 10px;
+	}
+	td:before {
+		font-weight: bold;
+		padding-right: 20px;
+		font-size: 12px;
+		content: " " attr(data-label) " //";
+	}
+}
+
+/* Smartphones (portrait and landscape) -----------*/ 
+@media only screen and (min-device-width : 320px) and (max-device-width
+	: 480px) {
+	body {
+		padding: 0;
+		margin: 0;
+		width: 320px;
+	}
+}
+
+/* iPads (portrait and landscape) -----------*/ 
+@media only screen and (min-device-width: 768px) and (max-device-width:
+	1024px) {
+	body {
+		width: 495px;
+	}
+}

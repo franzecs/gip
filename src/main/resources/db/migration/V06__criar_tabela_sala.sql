@@ -1,0 +1,7 @@
+CREATE TABLE sala (
+	codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(4) NOT NULL,
+    tamanho VARCHAR(3),
+	andar VARCHAR(10),
+    situacao VARCHAR(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	layout:decorate="~{layout/LayoutPadrao}">
+
+<section layout:fragment="conteudo">
+	<div class="container card">
+		<div class="panel panel-primary">
+			<div class="panel-heading sombra">
+				<h2 class="panel-title text-center"><strong>IES Cadastradas</strong>
+					<a  class="btn btn-info sombra-btn pull-right" style="margin:-8px -12px;" 
+						th:href="@{/gip/administrador/ies/novaIes}" 
+						title="Novo" data-toggle="tooltip"
+						sec:authorize="hasRole('ADMINISTRADOR')"> 
+								<i class="fa  fa-fw  fa-plus"></i> 
+					</a>
+				</h2>		
+			</div>
+			<div class="panel-body">
+				<div class="container-fluid">
+					
+					<th:block layout:insert="~{/layout/fragmentos/alertas :: success}"></th:block>
+										
+					<table	id="tabela-ies" class="table  table-striped  
+						table-bordered  table-hover  table-condensed table-reflow">
+						<thead class="aw-table-header-solid">
+							<tr>
+								<th class="ik-table-col-codigo">Código</th>
+								<th class="ik-table-col-codigo">SIGLA</th>
+								<th class="ik-table-col-descricao hidden-xs">Nome</th>
+								<th class="ik-table-col-descricao hidden-xs">Mantenedora</th>
+								<th class="ik-table-col-icons" sec:authorize="hasRole('ADMINISTRADOR')"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="ies : ${listaies}">
+								<td th:text="${ies.codigo}"></td>
+								<td>
+									<a	th:href="@{/gip/administrador/ies/{codigo}(codigo=${ies.codigo})}" th:text="${ies.sigla}"></a>
+								</td>
+								<td class="hidden-xs" th:text="${ies.nome}"></td>
+								<td class="hidden-xs"	th:text="${ies.mantenedora}"></td>
+								<td class="text-center" style="vertical-align: middle;" sec:authorize="hasRole('ADMINISTRADOR')">
+									<button type="button" class="btn btn-danger btn-xs btn-block btn-active" >
+										<i	class="fa fa-trash"	style="cursor: pointer"	
+											data-toggle="modal"	
+											data-target="#confirmaExclusaoModal"
+											data:nome="${ies.nome}"
+											data:url-delete="@{/gip/administrador/ies/{codigo}(codigo=${ies.codigo})}">
+										</i>
+									</button>
+								</td>
+							</tr>
+							<tr th:if="${listaies.empty}">
+								<td	colspan="6"	class="bg-danger">Nenhuma IES cadastrado</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<th:block layout:insert="~{/layout/fragmentos/parts :: confirmaExclusao (@{/designer/administrador/ies})}"></th:block>
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/datatable/jquery.dataTables.js}"></script>
+	<script th:src="@{/datatable/dataTables.bootstrap.js}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#tabela-ies').DataTable();
+		} );
+	</script>
+</th:block>
+</html>

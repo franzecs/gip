@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout/LayoutPadrao}">
+
+<section layout:fragment="conteudo">
+<form id="formulario" method="post" enctype="multipart/form-data">
+    <input type="text" name="campo1" value="hello" />
+    <input type="text" name="campo2" value="world" />
+    <input name="arquivo" type="file" onchange="visualizarImg()"/>
+    <button>Enviar</button>
+</form>
+</section>
+<th:block layout:fragment="javascript-extra">
+
+<script>
+//adiciona a imagem ao campo html img
+function visualizarImg() {
+	var preview = document.querySelectorAll('img').item(2);
+	var file = document.querySelector('input[type=file]').files[0];
+	
+	var reader = new FileReader();
+
+	reader.onloadend = function() {
+		preview.src = reader.result;// carrega em base64 a img
+		
+		$.ajax({
+			method:"POST",
+			url:"fileUpload",
+			data: {fileUpload: reader.result}
+		}).done(function(response){
+			alert("Sucesso: " + response);
+			
+		}).fail(function(xhr, status, errorThrown){
+			alert("Error: " + xhr.responseText)
+		});
+	};
+
+	if (file) {
+		reader.readAsDataURL(file);
+	} else {
+		preview.src = "";
+	}
+}
+
+</script>
+
+</th:block>
+</html>

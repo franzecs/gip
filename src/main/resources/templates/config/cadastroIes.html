@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layout/LayoutPadrao}">
+
+<section layout:fragment="conteudo">
+	<div class="container card">
+		<div class="panel panel-primary">
+			
+			<div class="panel-heading sombra">
+				<h2 class="panel-title text-center"><strong>Cadastro de IES</strong></h2>
+			</div>
+			
+			<div class="panel-body">
+				<div class="container-fluid">
+
+					<th:block layout:insert="~{/layout/fragmentos/alertas :: success}"></th:block>
+	
+					<form method="post" class="form-vertical  js-form-loading" enctype="multipart/form-data"
+						th:object="${ies}" th:action="@{/gip/administrador/ies/novaIes}">
+						
+						<th:block layout:insert="~{/layout/fragmentos/alertas :: validation}"></th:block>
+																					
+						<input type="hidden" th:field="*{codigo}"/>
+						
+						<div class="col-xs-12 col-sm-8 col-md-8">
+							<div class="input-group input-group-sm" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+								<label for=nome class="control-label visible-xs">Nome</label>
+								<span class="input-group-addon control-label hidden-xs">Nome:</span> 
+								<input id="nome" type="text"
+									class="form-control" th:field="*{nome}" />
+							</div>
+						</div>
+						
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<div class="input-group input-group-sm" th:classappend="${#fields.hasErrors('sigla')} ? has-error">
+								<label for=sigla class="control-label visible-xs">Sigla</label>
+								<span class="input-group-addon control-label hidden-xs">Sigla:</span> 
+								<input id="sigla" type="text"
+									class="form-control" th:field="*{sigla}" />
+							</div>
+						</div>
+										
+						<div class="col-xs-12 col-sm-8 col-md-8">
+							<div class="input-group input-group-sm" th:classappend="${#fields.hasErrors('mantenedora')} ? has-error">
+								<label for=mantenedora class="control-label visible-xs">Mantenedora</label>
+								<span class="input-group-addon control-label hidden-xs">Mantenedora:</span>
+								<input id="mantenedora" type="text" class="form-control" th:field="*{mantenedora}"/>
+							</div>
+						</div>
+																		
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<div class="input-group" th:classappend="${#fields.hasErrors('logo')} ? has-error" >
+								<img class="col-xs-12 img-thumbnail img-responsive" id="foto1" th:src="@{/layout/images/logo_vazio.jpg}" th:if="${#strings.isEmpty(ies.logo)}" style="max-width: 120px"/>
+								<img class="col-xs-12 img-thumbnail img-responsive" id="foto" th:src="*{logo}" th:if="${not #strings.isEmpty(ies.logo)}" style="max-width: 120px"/>
+								<input type="hidden" th:field=*{logo}/>
+								<input type="file" name="file" onchange="visualizarImg(2,0)" capture="camera"/>
+							</div>	
+						</div>
+																		
+						<div class="col-xs-12">
+							<div class="form-group">
+								<button class="btn  btn-success pull-left sombra-btn" 
+										type="submit" title="Salvar IES" 
+										data-toggle="tooltip" 
+										sec:authorize="hasRole('ADMINISTRADOR') or hasRole('EDITOR')">Salvar</button>
+								<a class="btn btn-info pull-right sombra-btn" 
+									th:href="@{/gip/administrador/ies}" title="voltar" data-toggle="tooltip"> 
+									<i class="fa  fa-reply"></i> 
+								</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/layout/javascripts/VisualizarImagem.js}"></script>
+</th:block>
+</html>
